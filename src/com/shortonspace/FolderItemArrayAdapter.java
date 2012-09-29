@@ -30,15 +30,21 @@ class FolderItemArrayAdapter extends ArrayAdapter<FolderItem> {
 		}
 		FolderItem fi = items.get(position);
 		if (fi != null) {
-			int[] colors = fi.isFileObject() ? colorUtils.getFileColors()
-					: colorUtils.getFolderColors(position);
-			v.setBackgroundColor(colors[0]);
+			int[] colors;
+			
+			if (fi.isFileObject()) {
+				colors = colorUtils.getFileColors();
+			} else {
+				// empty folders are shown with same color
+				colors = colorUtils.getFolderColors(fi.isFolderEmpty() ? colorUtils.getColorsCount() - 1 : position);
+			}
+			v.setBackgroundColor(colors[ColorUtils.BACKGROUND_COLOR]);
 
 			TextView filename = (TextView) v.findViewById(R.id.filename);
 			TextView filecount = (TextView) v.findViewById(R.id.filecount);
 			TextView filesize = (TextView) v.findViewById(R.id.filesize);
 
-			setRowText(getContext(), fi, colors[1], filename, filecount, filesize);
+			setRowText(getContext(), fi, colors[ColorUtils.TEXT_COLOR], filename, filecount, filesize);
 		}
 		return v;
 	}
@@ -49,7 +55,7 @@ class FolderItemArrayAdapter extends ArrayAdapter<FolderItem> {
 			filename.setText(fi.getFile().getName());
 			filename.setTextColor(textColor);
 		}
-		boolean isFolderEmpty = fi.isFolderObject() && fi.getSubFilesCount() == 0 && fi.getSubFoldersCount() == 0;
+		boolean isFolderEmpty = fi.isFolderEmpty();
 		if (filecount != null) {
 			String text = null;
 			Resources res = context.getResources();
