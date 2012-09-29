@@ -108,6 +108,11 @@ public class FolderItem {
 		subFilesCount += i;
 	}
 	
+	public boolean isFolderEmpty() {
+		return isFolderObject() && getSubFilesCount() == 0
+				&& getSubFoldersCount() == 0;
+	}
+
 	public boolean renameTo(String name) {
         File newPath = new File(getFile().getParentFile(), name);
         boolean result = getFile().renameTo(newPath);
