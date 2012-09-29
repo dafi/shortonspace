@@ -118,10 +118,10 @@ public class FolderRetrieverActivity extends ListActivity implements
     private void deleteFolderItem(final FolderItem fi) {
     	final File currFile = fi.getFile();
     	final Context context = this;
-    	String message = getResources().getString(fi.isFileObject() ? R.string.confirm_delete_file : R.string.confirm_delete_folder);
+    	String message = getResources().getString(fi.isFileObject() ? R.string.delete_file_message : R.string.delete_folder_message);
     	
 		new AlertDialog.Builder(this)
-        .setTitle(R.string.delete_file)
+        .setTitle(R.string.confirm_delete_file)
         .setMessage(String.format(message, currFile.getName()))
         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {

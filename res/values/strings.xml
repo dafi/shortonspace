@@ -31,8 +31,9 @@
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="confirm_delete_file">Delete \'%1$s\'?</string>
-    <string name="confirm_delete_folder">\'%1$s\' is a folder, its content will be deleted, too. Are you sure?</string>
+    <string name="confirm_delete_file">Confirm Delete</string>
+    <string name="delete_file_message">Are you sure to delete the file?\n%1$s</string>
+    <string name="delete_folder_message">\'%1$s\' is a folder, its content will be deleted, too.\nAre you sure?</string>
     <string name="unable_to_determine_capacity">Unable to determine capacity</string>
     <string name="about">About</string>
     <string name="about_text">Version %1$s\nReleased under MIT license\n\nWritten by Davide Ficano</string>
