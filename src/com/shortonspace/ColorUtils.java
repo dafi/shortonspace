@@ -8,6 +8,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 
 public class ColorUtils {
+	public static final int BACKGROUND_COLOR = 0;
+	public static final int TEXT_COLOR = 1;
+
 	private TypedArray backgroundFoldersColors;
 	private TypedArray textFoldersColors;
 	private int backgroundFileColor;
