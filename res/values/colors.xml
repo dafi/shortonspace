@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    	http://www.bretttolbert.com/projects/colorscale/
+    	steps 10
+    	Min Hue 0 Max Hue 0.706 
+    	Min Sat 0.9 Max Sat 0.6 
+    	Min Val 0.885 Max Val 0.619 
+    -->
+
+    <array name="background_folders_colors">
+        <item>#ffe11616</item>
+        <item>#ffda6d1c</item>
+        <item>#ffd4b821</item>
+        <item>#ffa0cd27</item>
+        <item>#ff5bc62b</item>
+        <item>#ff2fbf40</item>
+        <item>#ff33b87b</item>
+        <item>#ff37b2ad</item>
+        <item>#ff3a7fab</item>
+        <item>#ff3c50a4</item>
+    </array>
+    <array name="text_folders_colors">
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+        <item>#ffffffff</item>
+    </array>
+
+    <color name="background_file_color">#ffc0c0c0</color>
+    <color name="text_file_color">#ffffffff</color>
+    <color name="storage_bar_gradient_end_color">#ff707070</color>
+
+</resources>

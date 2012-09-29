@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/storage_path"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TableRow android:id="@+id/capacity_space_row" >
+
+        <TextView
+            android:id="@+id/capacity_space_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/capacity"
+            android:textSize="@dimen/storage_info_font_size_small" />
+
+        <TextView
+            android:id="@+id/capacity_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/storage_info_font_size_small" />
+    </TableRow>
+
+    <TableRow android:id="@+id/used_space_row" >
+
+        <TextView
+            android:id="@+id/used_space_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/used"
+            android:textSize="@dimen/storage_info_font_size_small" />
+
+        <TextView
+            android:id="@+id/used_space"
+            android:layout_width="@dimen/storage_info_text_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/storage_info_font_size_small" />
+    </TableRow>
+
+    <TableRow android:id="@+id/free_space_row" >
+
+        <TextView
+            android:id="@+id/free_space_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/free"
+            android:textSize="@dimen/storage_info_font_size_small" />
+
+        <TextView
+            android:id="@+id/free_space"
+            android:layout_width="@dimen/storage_info_text_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/storage_info_font_size_small" />
+    </TableRow>
+
+    <ProgressBar
+        android:id="@+id/used_space_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:maxHeight="@dimen/storage_info_bar_height"
+        android:minHeight="@dimen/storage_info_bar_height" />
+
+</TableLayout>

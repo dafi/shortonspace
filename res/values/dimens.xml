@@ -1,0 +1,11 @@
+<resources>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="file_info_font_size_small">14dp</dimen>
+    <dimen name="storage_info_font_size_small">14dp</dimen>
+    <dimen name="storage_info_text_width">80dp</dimen>
+    <dimen name="storage_info_bar_height">8dp</dimen>
+
+</resources>

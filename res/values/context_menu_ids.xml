@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="view_file" type="id"/>
+    <item name="delete_file" type="id"/>
+    <item name="rename_file" type="id"/>
+
+</resources>
