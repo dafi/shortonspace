@@ -195,6 +195,9 @@ public class FolderRetrieverActivity extends ListActivity implements
 		case R.id.refresh:
 			new FolderRetrieverAsyncTask(this).execute(new String[] {startFolder});
 			break;
+		case R.id.moveup:
+			moveUp();
+			break;
 		case R.id.about:
 			showAboutDialog();
 			break;

@@ -37,5 +37,6 @@
     <string name="unable_to_determine_capacity">Unable to determine capacity</string>
     <string name="about">About</string>
     <string name="about_text">Version %1$s\nReleased under MIT license\n\nWritten by Davide Ficano</string>
-
+    <string name="moveup">Move Up</string>
+    
 </resources>
