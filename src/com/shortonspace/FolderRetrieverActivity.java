@@ -31,6 +31,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shortonspace.gesture.DefaultViewSwipeListener;
+import com.shortonspace.gesture.ViewSwipeDetector;
+
 @SuppressWarnings("unchecked")
 public class FolderRetrieverActivity extends ListActivity implements
 		OnItemClickListener, ActionBar.OnNavigationListener {
@@ -44,6 +47,11 @@ public class FolderRetrieverActivity extends ListActivity implements
 
         registerForContextMenu(getListView());
 		getListView().setOnItemClickListener(this);
+		new ViewSwipeDetector(getListView(), new DefaultViewSwipeListener() {
+			public void onRightToLeftSwipe() {
+				moveUp();
+			}
+		});
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -275,6 +283,7 @@ public class FolderRetrieverActivity extends ListActivity implements
 		}
 		return true;
 	}
+	
 	private class FolderRetrieverAsyncTask extends
 			AsyncTask<String, Object, FolderItem> {
 		ProgressDialog progressDialog;
