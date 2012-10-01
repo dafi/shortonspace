@@ -31,9 +31,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shortonspace.gesture.DefaultViewSwipeListener;
-import com.shortonspace.gesture.ViewSwipeDetector;
-
 @SuppressWarnings("unchecked")
 public class FolderRetrieverActivity extends ListActivity implements
 		OnItemClickListener, ActionBar.OnNavigationListener {
@@ -47,11 +44,11 @@ public class FolderRetrieverActivity extends ListActivity implements
 
         registerForContextMenu(getListView());
 		getListView().setOnItemClickListener(this);
-		new ViewSwipeDetector(getListView(), new DefaultViewSwipeListener() {
-			public void onRightToLeftSwipe() {
-				moveUp();
-			}
-		});
+//		new ViewSwipeDetector(getListView(), new DefaultViewSwipeListener() {
+//			public void onRightToLeftSwipe() {
+//				moveUp();
+//			}
+//		});
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -64,16 +61,13 @@ public class FolderRetrieverActivity extends ListActivity implements
 
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
+		getMenuInflater().inflate(R.menu.retriever_context_menu, menu);
+
 		AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
 		FolderItem fi = (FolderItem) getListView().getItemAtPosition(contextMenuInfo.position);
-		menu.setHeaderTitle(fi.getFile().getName());
 
-		boolean isFolderEmpty = fi.getSubFilesCount() == 0 && fi.getSubFoldersCount() == 0;
-		if (fi.isFileObject() || !isFolderEmpty) {
-			menu.add(Menu.NONE, R.id.view_file, Menu.NONE, R.string.view_file);
-		}
-		menu.add(Menu.NONE, R.id.delete_file, Menu.NONE, R.string.delete_file);
-		menu.add(Menu.NONE, R.id.rename_file, Menu.NONE, R.string.rename_file);
+		menu.setHeaderTitle(fi.getFile().getName());
+		menu.findItem(R.id.view_file).setVisible(!fi.isFolderEmpty());
 	}	
 
     public boolean onContextItemSelected(MenuItem item) {
@@ -104,7 +98,7 @@ public class FolderRetrieverActivity extends ListActivity implements
         .setTitle(R.string.rename_file)
         .setMessage(currFile.getName())
         .setView(editText)
-        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String name = editText.getText().toString();
                 if (!name.equals(currFile.getName())) {
@@ -119,7 +113,7 @@ public class FolderRetrieverActivity extends ListActivity implements
                     }
                 }
             }
-        }).setNegativeButton(R.string.cancel, null)
+        }).setNegativeButton(android.R.string.cancel, null)
         .show();
 	}
 
@@ -127,7 +121,7 @@ public class FolderRetrieverActivity extends ListActivity implements
     	final File currFile = fi.getFile();
     	final Context context = this;
     	String message = getResources().getString(fi.isFileObject() ? R.string.delete_file_message : R.string.delete_folder_message);
-    	
+
 		new AlertDialog.Builder(this)
         .setTitle(R.string.confirm_delete_file)
         .setMessage(String.format(message, currFile.getName()))
@@ -184,7 +178,7 @@ public class FolderRetrieverActivity extends ListActivity implements
 				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 				alertDialog.setTitle(getResources().getString(R.string.error_unable_to_view_file));
 				alertDialog.setMessage(e.getMessage());
-				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getResources().getString(R.string.ok), (Message)null);
+				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getResources().getString(android.R.string.ok), (Message)null);
 				alertDialog.show();
 			}
 		}
@@ -219,7 +213,7 @@ public class FolderRetrieverActivity extends ListActivity implements
 			        .setTitle(R.string.app_name)
         .setIcon(R.drawable.ic_launcher)
         .setMessage(aboutText )
-        .setNegativeButton(R.string.ok, null)
+        .setNegativeButton(android.R.string.ok, null)
         .show();
 	}
 
