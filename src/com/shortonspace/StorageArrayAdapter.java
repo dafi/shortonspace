@@ -73,7 +73,7 @@ class StorageArrayAdapter extends ArrayAdapter<Map<String, Object>> {
 				
 				ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.used_space_bar);
 				progressBar.setMax(colorUtils.getColorsCount());
-			    progressBar.setProgressDrawable(colorUtils.getGradientColor(colorIndex));
+			    progressBar.setProgressDrawable(colorUtils.getClipDrawable(colorIndex));
 				progressBar.setBackgroundDrawable(progressHorizontal);
 				progressBar.setProgress(colorIndex);
 				

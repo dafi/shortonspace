@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,21 +31,25 @@ class FolderItemArrayAdapter extends ArrayAdapter<FolderItem> {
 		}
 		FolderItem fi = items.get(position);
 		if (fi != null) {
-			int[] colors;
+			int textColor;
+			Drawable backgroundColor;
 			
 			if (fi.isFileObject()) {
-				colors = colorUtils.getFileColors();
+				textColor = colorUtils.getTextFileColor();
+				backgroundColor = colorUtils.getBackgroundFileColor();
 			} else {
 				// empty folders are shown with same color
-				colors = colorUtils.getFolderColors(fi.isFolderEmpty() ? colorUtils.getColorsCount() - 1 : position);
+				int indexColor = fi.isFolderEmpty() ? colorUtils.getColorsCount() - 1 : position;
+				textColor = colorUtils.getTextFolderColor(indexColor);
+				backgroundColor = colorUtils.getBackgroundFolderColor(indexColor);
 			}
-			v.setBackgroundColor(colors[ColorUtils.BACKGROUND_COLOR]);
+			v.setBackgroundDrawable(backgroundColor);
 
 			TextView filename = (TextView) v.findViewById(R.id.filename);
 			TextView filecount = (TextView) v.findViewById(R.id.filecount);
 			TextView filesize = (TextView) v.findViewById(R.id.filesize);
 
-			setRowText(getContext(), fi, colors[ColorUtils.TEXT_COLOR], filename, filecount, filesize);
+			setRowText(getContext(), fi, textColor, filename, filecount, filesize);
 		}
 		return v;
 	}

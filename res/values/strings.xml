@@ -27,8 +27,6 @@
     <string name="error_unable_to_view_file">Unable to view file</string>
     <string name="error_unable_to_rename">Unable to rename file</string>
     <string name="error_unable_to_delete">Unable to delete file</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="confirm_delete_file">Confirm Delete</string>

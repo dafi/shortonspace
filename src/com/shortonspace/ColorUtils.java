@@ -3,19 +3,19 @@ package com.shortonspace;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 
 public class ColorUtils {
-	public static final int BACKGROUND_COLOR = 0;
-	public static final int TEXT_COLOR = 1;
-
 	private TypedArray backgroundFoldersColors;
 	private TypedArray textFoldersColors;
-	private int backgroundFileColor;
+	private Drawable backgroundFileColor;
 	private int textFileColor;
-	private ClipDrawable[] gradients;
+	private GradientDrawable[] gradients;
+	private ClipDrawable[] clips;
 	private final Context context;
 
 	public ColorUtils(Context context) {
@@ -30,48 +30,75 @@ public class ColorUtils {
 			throw new IndexOutOfBoundsException(
 					"backgroundFoldersColors length differs from textFoldersColors");
 		}
-		backgroundFileColor = resources.getColor(R.color.background_file_color);
+		backgroundFileColor = createGradientFromColor(resources.getColor(R.color.background_file_color));
 		textFileColor = resources.getColor(R.color.text_file_color);
 	}
 
-	public int[] getFolderColors(int index) {
-		int length = backgroundFoldersColors.length();
-		if (index < length) {
-			return new int[] { backgroundFoldersColors.getColor(index, 0),
-					textFoldersColors.getColor(index, 0) };
-		}
-		int last = length - 1;
-		return new int[] { backgroundFoldersColors.getColor(last, 0),
-				textFoldersColors.getColor(last, 0) };
-
+	public int getTextFolderColor(int index) {
+		int safeIndex = Math.min(index, backgroundFoldersColors.length() - 1);
+		return textFoldersColors.getColor(safeIndex, 0);
 	}
 
-	public int[] getFileColors() {
-		return new int[] { backgroundFileColor, textFileColor };
+	public Drawable getBackgroundFolderColor(int index) {
+		int safeIndex = Math.min(index, backgroundFoldersColors.length() - 1);
+		return getGradientColor(safeIndex);
 	}
 
-	public ClipDrawable getGradientColor(int index) {
+	public int getTextFileColor() {
+		return textFileColor;
+	}
+	
+	public Drawable getBackgroundFileColor() {
+		return backgroundFileColor;
+	}
+
+	public GradientDrawable getGradientColor(int index) {
 		if (gradients == null) {
 			int length = backgroundFoldersColors.length();
-			gradients = new ClipDrawable[backgroundFoldersColors.length()];
-			int endColor = context.getResources().getColor(
-					R.color.storage_bar_gradient_end_color);
+			gradients = new GradientDrawable[length];
+
 			for (int i = 0; i < length; i++) {
 				int color = backgroundFoldersColors.getColor(i, 0);
-				GradientDrawable gd = new GradientDrawable(
-						GradientDrawable.Orientation.TOP_BOTTOM, new int[] {
-								color, endColor });
-				gd.setCornerRadius(5);
-				ClipDrawable clip = new ClipDrawable(gd, Gravity.LEFT,
-						ClipDrawable.HORIZONTAL);
-				// colors are inverted, lower value less space used
-				gradients[length - 1 - i] = clip;
+				gradients[i] = createGradientFromColor(color);
 			}
 		}
 		return gradients[index];
 	}
+
+	private GradientDrawable createGradientFromColor(int startColor) {
+		float hsv[] = new float[3];
+		Color.colorToHSV(startColor, hsv);
+		// create the end color
+		hsv[2] *= 0.7;
+		int endColor = Color.HSVToColor(hsv);
+		GradientDrawable gd = new GradientDrawable(
+				GradientDrawable.Orientation.TOP_BOTTOM, new int[] {
+						startColor, endColor });
+		gd.setCornerRadius(5);
+		return gd;
+	}
 	
+	public ClipDrawable getClipDrawable(int index) {
+		if (clips == null) {
+			int length = backgroundFoldersColors.length();
+			clips = new ClipDrawable[length];
+
+			for (int i = 0; i < length; i++) {
+				GradientDrawable gd = getGradientColor(i);
+				ClipDrawable clip = new ClipDrawable(gd, Gravity.LEFT,
+						ClipDrawable.HORIZONTAL);
+				// colors are inverted, lower value less space used
+				clips[length - 1 - i] = clip;
+			}
+		}
+		return clips[index];
+	}
+
 	public int getColorsCount() {
 		return backgroundFoldersColors.length();
+	}
+
+	public Context getContext() {
+		return context;
 	}
 }
