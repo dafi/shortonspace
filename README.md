@@ -1,9 +1,10 @@
 ShortOnSpace
 ============
 
-Analyze storage cards usage and free up disk space on Android
+Analyze storage cards usage and free up disk space
 
-You can scan you android device to discover which folder or file occupy more space.
+You can scan you android device to discover which folder or file occupies more space.
+
 Using a color representation it is simple to see where is the wasted space.
 
 Some file operations are possible directly from application
